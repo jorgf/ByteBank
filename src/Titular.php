@@ -1,21 +1,17 @@
 <?php
 
 class Titular {
-  private $nomeTitular;
-  private $cpfTitular;
+  private string $nomeTitular;
+  private Cpf $cpfTitular;
 
-  public function __construct(string $cpf, string $nome) {
+  public function __construct(Cpf $cpf, string $nome) {
     $this->cpfTitular = $cpf;
     $this->validarNome($nome);
     $this->nomeTitular = $nome;
   }
   
-  public function definirCpf(string $cpf) {
-    $this->cpfTitular = $cpf;
-  }
- 
   public function recuperarCpf() {
-    return $this->cpfTitular;
+    return $this->cpfTitular->recuperarCpf();
   }
  
   public function definirNome(string $nome) {
