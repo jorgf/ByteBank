@@ -1,39 +1,19 @@
 <?php
-//NOME DAS CLASSES : SUBSTANTIVOS
-//NOME DOS METODOS : VERBOS IMPERATIVOS 
+
 class Conta { 
 
-  private string $cpfTitular;
-  private string $nomeTitular;
+  private Titular $titular;
   private float $saldo = 0;
   public static $numeroDeContas = 0;
 
-  public function __construct(string $cpfTitular, string $nomeTitular) {
-    $this->cpfTitular = $cpfTitular;
-    $this->validarNome($nomeTitular);
-    $this->nomeTitular = $nomeTitular;
+  public function __construct(Titular $titular) {
+    $this->titular = $titular;
     $this->saldo = 0;
     self::$numeroDeContas++;
   }
 
-  public function __destruct() { //executa o garbage collector para liberar memoria
+  public function __destruct() {
     self::$numeroDeContas--;
-  }
-
-  public function definirCpf(string $cpf) {
-    $this->cpfTitular = $cpf;
-  }
-
-  public function recuperarCpfTitular() {
-    return $this->cpfTitular;
-  }
-
-  public function definirNome(string $nome) {
-    $this->nomeTitular = $nome;
-  }
-
-  public function recuperarNomeTitular() {
-    return $this->nomeTitular;
   }
 
   public function sacar(float $valorParaSacar) {
@@ -61,11 +41,12 @@ class Conta {
     $contaDestino->depositar($valorParaTransferir);
   }
 
-  private function validarNome(string $nome) {
-    if(mb_strlen($nome) < 5) {
-      echo "ERRO! o nome do titular precisa ter mais de 5 caracteres!\n";
-      exit();
-    }
+  public function recuperarNomeTitular() {
+    return $this->titular->recuperarNome();
+  }
+
+  public function recuperarCpfTitular() {
+    return $this->titular->recuperarCpf();
   }
 
   public static function recuperarNumeroDeContas() {
