@@ -17,15 +17,15 @@ abstract class Funcionario extends Pessoa{
     $this->salario = $salario;
   }
   
-  public function retornarCargo(){
+  public function retornarCargo():string {
     return $this->cargo;
   }
 
-  public function retornaSalario(){
+  public function retornaSalario():float {
     return $this->salario;
   }
 
-  public function calculaBonificacao(){
+  public function calculaBonificacao():float {
     return $this->salario * 0.1;
   }
 }

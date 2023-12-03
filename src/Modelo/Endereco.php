@@ -19,16 +19,16 @@ class Endereco {
     $this->cidade = $cidade;
   }
 
-  public function recuperarRua(){
+  public function recuperarRua():string {
     return $this->rua;
   }
-  public function recuperarBairro(){
+  public function recuperarBairro():string {
     return $this->bairro;
   }
-  public function recuperarNumero(){
+  public function recuperarNumero():string {
     return $this->numero;
   }
-  public function recuperarCidade(){
+  public function recuperarCidade():string {
     return $this->cidade;
   }
 }

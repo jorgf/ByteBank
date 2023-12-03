@@ -11,17 +11,17 @@ class Cpf {
 
   }
 
-  public function recuperarNumero() {
+  public function recuperarNumero():string {
     return $this->numero;
   }
 
-  public function limparNumero($numero) {
+  public function limparNumero($numero):string {
     $pattern = '/[^\d]/';
     $replacement = "";
     return preg_replace($pattern, $replacement, $numero);
   }
 
-  public function validarNumero($numero) {
+  public function validarNumero($numero):void {
     if (strlen($this->limparnumero($numero)) < 11) {
       echo "CPF inválido!" . PHP_EOL;
       exit();

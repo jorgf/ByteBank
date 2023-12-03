@@ -17,8 +17,8 @@ abstract class Conta {
   public function __destruct() {
     self::$numeroDeContas--;
   }
-  //COrreção no calculo de saque
-  public function sacar(float $valorParaSacar) {
+  
+  public function sacar(float $valorParaSacar):void {
     $tarifaSaque = $valorParaSacar * $this->percentualTarifa();
     $valorSaque = $valorParaSacar + $tarifaSaque;
     if ($valorParaSacar > $this->saldo) {
@@ -28,7 +28,7 @@ abstract class Conta {
     $this->saldo -=$valorSaque;
   }
 
-  public function depositar(float $valorParaDepositar) {
+  public function depositar(float $valorParaDepositar):void {
     if($valorParaDepositar < 0) {
       echo "Valor precisa ser maior que zero!";
       return;
@@ -36,17 +36,17 @@ abstract class Conta {
     $this->saldo += $valorParaDepositar; 
   }
 
-  public function recuperarNomeTitular() {
+  public function recuperarNomeTitular():string {
     return $this->titular->recuperarNome();
   }
 
-  public function recuperarCpfTitular() {
+  public function recuperarCpfTitular():string {
     return $this->titular->recuperarCpf();
   }
 
-  public static function recuperarNumeroDeContas() {
+  public static function recuperarNumeroDeContas():int {
     return self::$numeroDeContas;
   }
 
-  abstract public function percentualTarifa(): float;
+  abstract public function percentualTarifa():float;
 }
