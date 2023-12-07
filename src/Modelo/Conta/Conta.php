@@ -2,6 +2,9 @@
 
 namespace Alura\Banco\Modelo\Conta;
 
+use Alura\Banco\Exceptions\SaldoInsuficienteException;
+use InvalidArgumentException;
+
 abstract class Conta { 
 
   private Titular $titular;
@@ -22,16 +25,14 @@ abstract class Conta {
     $tarifaSaque = $valorParaSacar * $this->percentualTarifa();
     $valorSaque = $valorParaSacar + $tarifaSaque;
     if ($valorParaSacar > $this->saldo) {
-      echo "Saldo indisponível\n";
-      return;
+      throw new SaldoInsuficienteException($valorSaque, $this->saldo);
     }
     $this->saldo -=$valorSaque;
   }
 
   public function depositar(float $valorParaDepositar):void {
     if($valorParaDepositar < 0) {
-      echo "Valor precisa ser maior que zero!";
-      return;
+     throw new InvalidArgumentException();
     }
     $this->saldo += $valorParaDepositar; 
   }
@@ -42,6 +43,10 @@ abstract class Conta {
 
   public function recuperarCpfTitular():string {
     return $this->titular->recuperarCpf();
+  }
+
+  public function recuperarSaldo():float {
+    return $this->saldo;
   }
 
   public static function recuperarNumeroDeContas():int {

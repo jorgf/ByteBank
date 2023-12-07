@@ -2,6 +2,8 @@
 
 namespace Alura\Banco\Modelo;
 
+use InvalidArgumentException;
+
 class Cpf {
   private $numero;
   
@@ -23,8 +25,7 @@ class Cpf {
 
   public function validarNumero($numero):void {
     if (strlen($this->limparnumero($numero)) < 11) {
-      echo "CPF inválido!" . PHP_EOL;
-      exit();
+      throw new InvalidArgumentException();
     }
   }
 

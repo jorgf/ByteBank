@@ -2,6 +2,8 @@
 
 namespace Alura\Banco\Modelo;
 
+use Alura\Banco\Exceptions\NomeInvalidoException;
+
 class Pessoa {
   protected string $nome;
   protected Cpf $cpf;
@@ -32,8 +34,7 @@ class Pessoa {
   
   protected function validarNome(string $nome) {
     if(mb_strlen($nome) < 5) {
-      echo "ERRO! o nome do titular precisa ter mais de 5 caracteres!\n";
-      exit();
+      throw new NomeInvalidoException();
     }
   }
     
